@@ -2,7 +2,6 @@
     <div id="app">
         <word-cloud v-bind:texts="texts"></word-cloud>
     </div>
-    </div>
 </template>
 
 <script>
