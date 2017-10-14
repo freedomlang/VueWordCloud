@@ -29,10 +29,11 @@ module.exports = function Word(text, size, color, w, h, mouse, drawArea) {
     };
     this.update = function() {
         this.border();
-        // if (!(mouse.x >= this.x && mouse.x <= this.x + this.width && mouse.y >= this.y - this.size && mouse.y <= this.y)) {
+        // if the word is not hovered then move it
+        if (!(mouse.x >= this.x && mouse.x <= this.x + this.width && mouse.y >= this.y - this.size && mouse.y <= this.y)) {
             this.x += this.vector.x;
             this.y += this.vector.y;
-        // }
+        }
     };
     this.border = function() {
         if (this.x + this.width > w || this.x < 0) {
