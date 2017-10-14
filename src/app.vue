@@ -1,6 +1,8 @@
 <template>
     <div id="app">
-        <word-cloud v-bind:texts="texts"></word-cloud>
+        <word-cloud
+            v-bind:texts="texts"
+            v-bind:mouseStop="true"></word-cloud>
     </div>
 </template>
 

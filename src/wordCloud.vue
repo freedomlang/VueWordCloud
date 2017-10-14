@@ -64,7 +64,8 @@
                 window.requestAnimationFrame(this.loop);
             },
             stopByMouse:function(){
-                this.canvasEl.addEventListener('mousemove',function(event) {
+                var that = this;
+                this.$el.addEventListener('mousemove',function(event) {
                     event.stopPropagation();
                     // important: correct mouse position:
                     var rect = this.getBoundingClientRect();

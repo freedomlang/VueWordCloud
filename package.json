@@ -1,6 +1,6 @@
 {
   "name": "@blackywkl/vuewordcloud",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "word cloud make by vue",
   "main": "dist/wordCloud.js",
   "scripts": {
