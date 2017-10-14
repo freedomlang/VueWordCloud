@@ -65,3 +65,20 @@ export default {
 </script>
 ```
 
+### Props
+
+| name      | meaning                               | type    | default value |
+| --------- | ------------------------------------- | ------- | ------------- |
+| texts     | array contain each word               | Array   | []            |
+| width     | width for entire component            | Number  | 400           |
+| height    | height for entire component           | Number  | 400           |
+| mouseStop | stop the word when the mouse is hover | Boolean | false         |
+
+##### properties for each item in texts
+
+| name       | meaning                  | type   | default value    |
+| ---------- | ------------------------ | ------ | ---------------- |
+| text       | word to show             | String | test             |
+| size       | font size for the word   | Number | random           |
+| fontFamily | font family for the word | String | Microsoft YaHei  |
+| color      | color for the word       | String | rgb(200,200,200) |

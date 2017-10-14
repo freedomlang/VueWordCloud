@@ -26,10 +26,6 @@
         		type: Number,
         		default: 400
         	},
-            delay:{
-                type:Number,
-                default: 200
-            },
             texts:{
                 type:Array,
                 default:[]
