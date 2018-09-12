@@ -7,6 +7,7 @@
     import Word from 'js/word.js';
 
     export default {
+        name: 'Wordcloud',
         data:function(){
             return {
                 id4canvas: randomID(),
