@@ -17,8 +17,8 @@ npm install @blackywkl/vuewordcloud
 ```
 <template>
 	<div id="app">
-      	<wordcloud v-bind:texts="texts"></wordcloud>
-  	</div>
+      <wordcloud v-bind:texts="texts"></wordcloud>
+  </div>
 </template>
 
 <script>
@@ -69,12 +69,12 @@ export default {
 
 | name      | meaning                               | type    | default value |
 | --------- | ------------------------------------- | ------- | ------------- |
-| texts     | array contain each word               | Array   | []            |
-| width     | width for entire component            | Number  | 400           |
-| height    | height for entire component           | Number  | 400           |
+| texts     | array contain each text               | Array   | []            |
+| width     | width(px) for entire component            | Number  | 400           |
+| height    | height(px) for entire component           | Number  | 400           |
 | mouseStop | stop the word when the mouse is hover | Boolean | false         |
 
-##### properties for each item in texts
+#### properties for each item in texts
 
 | name       | meaning                  | type   | default value    |
 | ---------- | ------------------------ | ------ | ---------------- |
@@ -82,3 +82,10 @@ export default {
 | size       | font size for the word   | Number | random           |
 | fontFamily | font family for the word | String | Microsoft YaHei  |
 | color      | color for the word       | String | rgb(200,200,200) |
+
+
+### Todos
+
+- [ ] Add callback for click
+- [ ] Add attribute to avoid collision
+- [ ] Add attribute to controll speed
