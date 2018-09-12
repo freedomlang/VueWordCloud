@@ -42,7 +42,7 @@
     "vue-loader": "^13.0.5",
     "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.4.4",
-    "webpack-dashboard": "^1.0.0-5",
+    "webpack-dashboard": "^2.0.0",
     "webpack-dev-server": "^2.9.1"
   }
 }
