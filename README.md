@@ -1,6 +1,6 @@
 # wordcloud for Vue
 
-A wordcloud component for Vue，
+A wordcloud component for Vue.
 
 
 
@@ -13,6 +13,7 @@ npm install @blackywkl/vuewordcloud
 
 
 ### Example
+[![Edit @blackywkl/vuewordcloud](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/3xz78r9r66)
 
 ```
 <template>
@@ -86,6 +87,9 @@ export default {
 
 ### Todos
 
+- [ ] Add github page
+- [x] Add online demo(codesandbox)
+- [ ] Add test
 - [ ] Add callback for click
 - [ ] Add attribute to avoid collision
 - [ ] Add attribute to controll speed
