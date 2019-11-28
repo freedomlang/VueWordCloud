@@ -1,12 +1,13 @@
 {
   "name": "@blackywkl/vuewordcloud",
-  "version": "1.0.3",
+  "version": "1.1.2",
   "description": "word cloud make by vue",
-  "main": "dist/wordCloud.js",
+  "main": "dist/vuewordcloud.js",
+  "module": "dist/vuewordcloud.esm.js",
   "scripts": {
     "test": "npx mocha --compilers js:@babel/register src/**/__test__/*.spec.js",
-    "pack": "webpack --config pack.config.js",
-    "dev": "cross-env mode=normal webpack-dev-server --config dev.config.js"
+    "build": "cross-env NODE_ENV=production rollup -c rollup.prod.js",
+    "dev": "cross-env NODE_ENV=development webpack-dashboard -- webpack-dev-server --config dev.config.js"
   },
   "repository": {
     "type": "git",
@@ -15,6 +16,10 @@
   "keywords": [
     "wordcloud",
     "vue"
+  ],
+  "files": [
+    "src/*.js",
+    "dist/*.js"
   ],
   "author": "blackywkl",
   "license": "MIT",
@@ -28,6 +33,7 @@
     "@babel/polyfill": "^7.7.0",
     "@babel/preset-env": "^7.7.4",
     "@babel/register": "^7.7.4",
+    "@rollup/plugin-alias": "^2.2.0",
     "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
     "cross-env": "^5.2.1",
@@ -42,14 +48,28 @@
     "node-sass": "^4.13.0",
     "resolve-url-loader": "^2.3.2",
     "rimraf": "^2.7.1",
+    "rollup": "^1.27.5",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-filesize": "^6.2.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-uglify": "^6.0.3",
+    "rollup-plugin-vue": "^5.1.4",
     "sass-loader": "^7.3.1",
     "style-loader": "^0.19.1",
+    "uglify-es": "^3.3.9",
     "vue": "^2.6.10",
-    "vue-loader": "^13.7.3",
-    "vue-style-loader": "^3.1.2",
+    "vue-loader": "^15.7.2",
+    "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.10",
-    "webpack": "^3.12.0",
-    "webpack-dashboard": "^2.1.0",
-    "webpack-dev-server": "^2.11.5"
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dashboard": "^3.2.0",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-dev-server": "^3.9.0"
   }
 }

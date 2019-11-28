@@ -3,8 +3,8 @@
 </template>
 
 <script>
-    import randomID from 'js/randomID.js';
-    import Word from 'js/word.js';
+    import randomID from './assets/js/randomID.js';
+    import Word from './assets/js/word.js';
 
     export default {
         name: 'Wordcloud',

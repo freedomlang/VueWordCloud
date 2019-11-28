@@ -16,4 +16,4 @@ function idGenerator() {
   );
 }
 
-module.exports = idGenerator;
+export default idGenerator;
