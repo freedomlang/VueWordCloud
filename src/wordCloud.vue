@@ -1,5 +1,5 @@
 <template>
-    <canvas v-bind:id="id4canvas"></canvas>
+    <canvas v-bind:id="id4canvas" :width="width" :height="height"></canvas>
 </template>
 
 <script>
@@ -11,10 +11,7 @@
         data:function(){
             return {
                 id4canvas: randomID(),
-                drawArea: {},
-                mouse: {},
-                words: [],
-                canvasSize: {}
+                drawArea: {}
             }
         },
         props:{
@@ -38,12 +35,21 @@
                 type: Function
             }
         },
+        created: function () {
+            // Set properties that unreactivity
+            this.mouse = {};
+            this.words = [];
+            this.canvasPosition = {};
+        },
         mounted:function(){
-        	this.$el.width = this.width;
-            this.$el.height	= this.height;
-            console.log(isFunc)
             this.$nextTick(function () {
-            	this.drawArea = this.$el.getContext("2d");
+                this.drawArea = this.$el.getContext("2d");
+                const canvasBounding = this.$el.getBoundingClientRect();
+                this.canvasPosition = {
+                    top: canvasBounding.top,
+                    left: canvasBounding.left
+                };
+
 	            if (this.mouseStop) {
                     this.stopByMouse();
                     
@@ -52,14 +58,13 @@
                     }
                 }
                 
-
 	            this.setUp();
             });
         },
         methods:{
             loop:function(){
                 window.requestAnimationFrame(this.loop);
-                this.drawArea.clearRect(0, 0, this.$el.width, this.$el.height);
+                this.drawArea.clearRect(0, 0, this.width, this.height);
 
                 for (let i = 0; i < this.words.length; i++) {
                     this.words[i].update();
@@ -69,7 +74,7 @@
             setUp:function(){
                 this.words = [];
                 for (var i = this.texts.length - 1; i >= 0; i--) {
-                    this.words.push(new Word(this.texts[i].text, this.texts[i].size, this.texts[i].color, this.$el.width, this.$el.height,this.mouse,this.drawArea));
+                    this.words.push(new Word(this.texts[i].text, this.texts[i].size, this.texts[i].color, this.width, this.height,this.mouse,this.drawArea));
                 }
                 window.requestAnimationFrame(this.loop);
             },
@@ -78,17 +83,14 @@
                 this.$el.addEventListener('mousemove',function(event) {
                     event.stopPropagation();
                     // important: correct mouse position:
-                    var rect = this.getBoundingClientRect();
-
-                    that.mouse.x = event.clientX - rect.left;
-                    that.mouse.y = event.clientY - rect.top;
+                    that.mouse.x = event.clientX - that.canvasPosition.left;
+                    that.mouse.y = event.clientY - that.canvasPosition.top;
                 });
             },
             handleClick: function (event) {
-                var rect = this.$el.getBoundingClientRect();
                 const clickedPosition = {
-                    x: event.clientX - rect.left,
-                    y: event.clientY - rect.top
+                    x: event.clientX - this.canvasPosition.left,
+                    y: event.clientY - this.canvasPosition.top
                 };
 
                 const clickedWord = this.words.filter(function (word) {
