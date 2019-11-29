@@ -7,7 +7,8 @@
   "scripts": {
     "test": "npx mocha --compilers js:@babel/register src/**/__test__/*.spec.js",
     "build": "cross-env NODE_ENV=production rollup -c rollup.prod.js",
-    "dev": "cross-env NODE_ENV=development webpack-dashboard -- webpack-dev-server --config dev.config.js"
+    "dev": "cross-env NODE_ENV=development webpack-dashboard -- webpack-dev-server --config dev.config.js",
+    "prebuild": "./node_modules/.bin/rimraf dist"
   },
   "repository": {
     "type": "git",
