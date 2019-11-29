@@ -93,3 +93,7 @@ export default {
 - [ ] Add callback for click
 - [ ] Add attribute to avoid collision
 - [ ] Add attribute to controll speed
+
+## License
+
+MIT.
