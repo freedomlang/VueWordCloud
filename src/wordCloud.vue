@@ -3,18 +3,17 @@
 </template>
 
 <script>
-    import randomID from './assets/js/randomID.js';
     import Word from './assets/js/word.js';
+    import { isFunc, randomID } from './util'
 
     export default {
         name: 'Wordcloud',
         data:function(){
             return {
                 id4canvas: randomID(),
-                canvasEl: {},
                 drawArea: {},
-                words: [],
                 mouse: {},
+                words: [],
                 canvasSize: {}
             }
         },
@@ -34,18 +33,28 @@
             mouseStop:{
                 type:Boolean,
                 default: false
+            },
+            mouseClick: {
+                type: Function
             }
         },
         mounted:function(){
         	this.$el.width = this.width;
-        	this.$el.height	= this.height;
+            this.$el.height	= this.height;
+            console.log(isFunc)
             this.$nextTick(function () {
             	this.drawArea = this.$el.getContext("2d");
 	            if (this.mouseStop) {
-	                this.stopByMouse();
-	            }
+                    this.stopByMouse();
+                    
+                    if (isFunc(this.mouseClick)) {
+                        this.$el.addEventListener('click', this.handleClick);
+                    }
+                }
+                
+
 	            this.setUp();
-            })
+            });
         },
         methods:{
             loop:function(){
@@ -73,6 +82,23 @@
 
                     that.mouse.x = event.clientX - rect.left;
                     that.mouse.y = event.clientY - rect.top;
+                });
+            },
+            handleClick: function (event) {
+                var rect = this.$el.getBoundingClientRect();
+                const clickedPosition = {
+                    x: event.clientX - rect.left,
+                    y: event.clientY - rect.top
+                };
+
+                const clickedWord = this.words.filter(function (word) {
+                    return clickedPosition.x >= word.x && clickedPosition.x <= word.x + word.width && clickedPosition.y >= word.y - word.size && clickedPosition.y <= word.y
+                })[0];
+
+                if (clickedWord) this.mouseClick({
+                    text: clickedWord.text,
+                    x: clickedWord.x,
+                    y: clickedWord.y
                 });
             }
         }

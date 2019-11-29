@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <word-cloud
+            v-bind:mouse-click="clickWord"
             v-bind:texts="texts"
             v-bind:mouseStop="true"></word-cloud>
     </div>
@@ -23,6 +24,11 @@
         },
         components:{
             WordCloud
+        },
+        methods: {
+            clickWord: function (word) {
+                console.log(word)
+            }
         }
     }
 </script>
