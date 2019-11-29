@@ -90,6 +90,10 @@ export default {
 - [ ] Add github page
 - [x] Add online demo(codesandbox)
 - [ ] Add test
-- [ ] Add callback for click
+- [x] Add callback for click
 - [ ] Add attribute to avoid collision
 - [ ] Add attribute to controll speed
+
+## License
+
+MIT.

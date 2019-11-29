@@ -14,7 +14,7 @@ function getAngle() {
     }
 }
 
-module.exports = function Word(text, size, color, w, h, mouse, drawArea) {
+function Word(text, size, color, w, h, mouse, drawArea) {
     this.x = (Math.random() * 0.8 + 0.2) * w - 100;
     this.y = (Math.random() * 0.8 + 0.2) * h;
     this.text = text || 'test';
@@ -53,3 +53,5 @@ module.exports = function Word(text, size, color, w, h, mouse, drawArea) {
         drawArea.fillStyle = this.color;
     };
 };
+
+export default Word;

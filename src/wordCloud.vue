@@ -1,21 +1,17 @@
 <template>
-    <canvas v-bind:id="id4canvas"></canvas>
+    <canvas v-bind:id="id4canvas" :width="width" :height="height"></canvas>
 </template>
 
 <script>
-    import randomID from 'js/randomID.js';
-    import Word from 'js/word.js';
+    import Word from './assets/js/word.js';
+    import { isFunc, randomID } from './util'
 
     export default {
         name: 'Wordcloud',
         data:function(){
             return {
                 id4canvas: randomID(),
-                canvasEl: {},
-                drawArea: {},
-                words: [],
-                mouse: {},
-                canvasSize: {}
+                drawArea: {}
             }
         },
         props:{
@@ -34,23 +30,41 @@
             mouseStop:{
                 type:Boolean,
                 default: false
+            },
+            mouseClick: {
+                type: Function
             }
         },
+        created: function () {
+            // Set properties that unreactivity
+            this.mouse = {};
+            this.words = [];
+            this.canvasPosition = {};
+        },
         mounted:function(){
-        	this.$el.width = this.width;
-        	this.$el.height	= this.height;
             this.$nextTick(function () {
-            	this.drawArea = this.$el.getContext("2d");
+                this.drawArea = this.$el.getContext("2d");
+                const canvasBounding = this.$el.getBoundingClientRect();
+                this.canvasPosition = {
+                    top: canvasBounding.top,
+                    left: canvasBounding.left
+                };
+
 	            if (this.mouseStop) {
-	                this.stopByMouse();
-	            }
+                    this.stopByMouse();
+                    
+                    if (isFunc(this.mouseClick)) {
+                        this.$el.addEventListener('click', this.handleClick);
+                    }
+                }
+                
 	            this.setUp();
-            })
+            });
         },
         methods:{
             loop:function(){
                 window.requestAnimationFrame(this.loop);
-                this.drawArea.clearRect(0, 0, this.$el.width, this.$el.height);
+                this.drawArea.clearRect(0, 0, this.width, this.height);
 
                 for (let i = 0; i < this.words.length; i++) {
                     this.words[i].update();
@@ -60,7 +74,7 @@
             setUp:function(){
                 this.words = [];
                 for (var i = this.texts.length - 1; i >= 0; i--) {
-                    this.words.push(new Word(this.texts[i].text, this.texts[i].size, this.texts[i].color, this.$el.width, this.$el.height,this.mouse,this.drawArea));
+                    this.words.push(new Word(this.texts[i].text, this.texts[i].size, this.texts[i].color, this.width, this.height,this.mouse,this.drawArea));
                 }
                 window.requestAnimationFrame(this.loop);
             },
@@ -69,10 +83,24 @@
                 this.$el.addEventListener('mousemove',function(event) {
                     event.stopPropagation();
                     // important: correct mouse position:
-                    var rect = this.getBoundingClientRect();
+                    that.mouse.x = event.clientX - that.canvasPosition.left;
+                    that.mouse.y = event.clientY - that.canvasPosition.top;
+                });
+            },
+            handleClick: function (event) {
+                const clickedPosition = {
+                    x: event.clientX - this.canvasPosition.left,
+                    y: event.clientY - this.canvasPosition.top
+                };
 
-                    that.mouse.x = event.clientX - rect.left;
-                    that.mouse.y = event.clientY - rect.top;
+                const clickedWord = this.words.filter(function (word) {
+                    return clickedPosition.x >= word.x && clickedPosition.x <= word.x + word.width && clickedPosition.y >= word.y - word.size && clickedPosition.y <= word.y
+                })[0];
+
+                if (clickedWord) this.mouseClick({
+                    text: clickedWord.text,
+                    x: clickedWord.x,
+                    y: clickedWord.y
                 });
             }
         }

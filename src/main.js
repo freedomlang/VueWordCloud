@@ -15,8 +15,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   	install(window.Vue);
 }
 
-// 把模块导出
-module.exports = {
-  	install,
-  	WordCloud
+export default {
+	install,
+	WordCloud
 }
