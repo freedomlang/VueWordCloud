@@ -1,41 +1,58 @@
 <template>
-    <div id="app">
-        <word-cloud
-            v-bind:mouse-click="clickWord"
-            v-bind:texts="texts"
-            v-bind:mouseStop="true"></word-cloud>
-    </div>
+  <div id="app">
+    <word-cloud
+      v-bind:mouse-click="clickWord"
+      v-bind:texts="texts"
+      v-bind:mouseStop="true"
+    ></word-cloud>
+  </div>
 </template>
 
 <script>
-    import WordCloud from './wordCloud.vue';
+import WordCloud from './wordCloud.vue';
 
-    export default {
-
-        name: 'app',
-        data () {
-            return {
-                texts: [{
-                    text: 'foo',
-                    size: 27,
-                    color: 'cyan'
-                }],
-            }
+export default {
+  name: 'app',
+  data() {
+    return {
+      texts: [
+        {
+          text: 'Cat',
         },
-        components:{
-            WordCloud
+        {
+          text: 'Fox',
         },
-        methods: {
-            clickWord: function (word) {
-                console.log(word)
-            }
-        }
-    }
+        {
+          text: 'Dog',
+        },
+        {
+          text: 'Lion',
+        },
+        {
+          text: 'Squirrel',
+        },
+        {
+          text: 'Snake',
+        },
+      ],
+    };
+  },
+  components: {
+    WordCloud,
+  },
+  methods: {
+    clickWord: function(word) {
+      console.log(word);
+    },
+  },
+};
 </script>
 
 <style>
-    html, body, #app {
-        height: 100%;
-        width: 100%;
-    }
+html,
+body,
+#app {
+  height: 100%;
+  width: 100%;
+}
 </style>

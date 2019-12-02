@@ -4,7 +4,7 @@ function randomFourChar() {
 
 function idGenerator() {
   return (
-    "_" +
+    '_' +
     randomFourChar() +
     randomFourChar() +
     randomFourChar() +
