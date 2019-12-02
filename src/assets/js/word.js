@@ -8,17 +8,21 @@ var defaultSettings = {
 function getAngle() {
     var angle = Math.floor(Math.random() * 360);
     if ((angle > 75 && angle <105)||(angle >170 && angle < 190)||(angle >255 && angle < 285)||(angle >350 || angle < 10)) {
-        getAngle()
+        return getAngle()
     }else {
         return angle;
     }
+}
+
+function randomInt(min = 14, max = 100) {
+    return Math.max(parseInt(min), parseInt(Math.random() * parseInt(max)))
 }
 
 function Word(text, size, color, w, h, mouse, drawArea) {
     this.x = (Math.random() * 0.8 + 0.2) * w - 100;
     this.y = (Math.random() * 0.8 + 0.2) * h;
     this.text = text || 'test';
-    this.size = size || (parseInt(Math.random() * 100) + 1);
+    this.size = size || randomInt(14);
     this.sizeText = this.size + 'px ' + (this.fontFamily || defaultSettings.defaultFontFamily);
     this.speed = defaultSettings.defaultSpeed + Math.random() * defaultSettings.variantSpeed;
     this.directionAngle = getAngle();
